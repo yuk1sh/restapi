@@ -9,7 +9,7 @@ services:
     env_file:
       - ./postgresql/.env
     ports:
-      - 5432:80
+      - 5432:5432
     networks:
       - container_link
     volumes:
@@ -42,24 +42,6 @@ services:
       options:
         max-size: '5m'
         max-file: '1'
-  # web:
-  #   container_name: web
-  #   build:
-  #     context: ./web
-  #     dockerfile: Dockerfile
-  #   command: npm run dev
-  #   image: rest-api/web
-  #   volumes:
-  #     - .:/web 
-  #   ports:
-  #     - 4242:4242
-  #   networks:
-  #     - container_link
-  #   logging:
-  #     driver: json-file
-  #     options:
-  #       max-size: '5m'
-  #       max-file: '1'
   pgadmin4:
     container_name: devenv_pgadmin4
     image: dpage/pgadmin4:6.2
@@ -68,7 +50,7 @@ services:
     depends_on:
       - db
     ports:
-      - 5433:80
+      - 5433:5433
     networks:
       - container_link
     volumes:
@@ -83,7 +65,7 @@ networks:
   default:
     name: bridge
   container_link:
-    name: devenv.docker.internal
+    name: restapi.docker.internal
 
 volumes:
   postgresql_data:
